@@ -1,5 +1,7 @@
 # What is Laravel?
 
+[![hackmd-github-sync-badge](https://hackmd.io/@jmrecodes/Hys9-Y17eg/badge)](https://hackmd.io/@jmrecodes/Hys9-Y17eg)
+
 Laravel is an open-source web application framework built on top of PHP, renowned for its elegant syntax and a rich set of features designed to make web development faster, more efficient, and enjoyable.
 
 ## MVC Architecture
@@ -39,4 +41,6 @@ Laravel comes packed with features that streamline the development process:
 *   **Vibrant Ecosystem:** Access to numerous official and community packages.
 
 ---
-[Back to Laravel Basics Index](https://hackmd.io/@jmrecodes/B1PTGFkXgl)
+[Back to Laravel Basics Index](laravel-basics-index.md)
+
+[Back to Knowledge Base Index](/README.md)

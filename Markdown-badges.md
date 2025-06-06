@@ -294,3 +294,5 @@ This document provides a comprehensive collection of markdown badge codes for va
 ---
 
 *This document was created as a comprehensive reference for markdown badges. Feel free to contribute by adding more badge examples!*
+
+[Back to Knowledge Base Index](/README.md)

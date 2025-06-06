@@ -1,0 +1,27 @@
+# HackMD References
+
+This file contains the mapping between local markdown files and their corresponding HackMD URLs for reference.
+
+## README.md
+https://hackmd.io/cP2KKpYCR32Yl0rh2VnqaQ
+
+## Laravel-Review Files
+
+- laravel-basics-index.md -> https://hackmd.io/@jmrecodes/B1PTGFkXgl
+- what-is-laravel.md -> https://hackmd.io/@jmrecodes/Hys9-Y17eg
+- setting-up-a-laravel-development-environment.md -> https://hackmd.io/@jmrecodes/Hkts-Fk7xg
+- laravel-basics-routing.md -> https://hackmd.io/@jmrecodes/r1u0-FJmxe
+- laravel-basics-controllers.md -> https://hackmd.io/@jmrecodes/SyTzMFkQlg
+- laravel-basics-models-and-eloquent-orm.md -> https://hackmd.io/@jmrecodes/ByhXzt17ll
+- laravel-basics-views-and-blade-templating.md -> https://hackmd.io/@jmrecodes/HkGBGYkQlg
+- laravel-basics-middleware.md -> https://hackmd.io/@jmrecodes/HyoOGtJXel
+- laravel-basics-artisan-console.md -> https://hackmd.io/@jmrecodes/H16FzYJXee
+- laravel-basics-database-migrations.md -> https://hackmd.io/@jmrecodes/SkAqzF17ex
+- laravel-basics-requests-responses-forms-and-validation.md -> https://hackmd.io/@jmrecodes/HkHnfF1mxe
+
+## Other Files
+
+- Prompt-Engineering-Guide-for-AI-Coding-Assistants.md -> https://hackmd.io/4LYvRPBkQCSAPJMW6E3pjg
+- Markdown-badges.md -> https://hackmd.io/5wgPxx1OTfaVDYUVeofRpQ
+
+This mapping can be used to add HackMD badges to each file as needed. 

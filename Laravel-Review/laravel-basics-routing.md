@@ -1,5 +1,7 @@
 # Laravel Basics: Routing
 
+[![hackmd-github-sync-badge](https://hackmd.io/@jmrecodes/r1u0-FJmxe/badge)](https://hackmd.io/@jmrecodes/r1u0-FJmxe)
+
 Routing in Laravel determines how your application responds to different URL requests. It's the mechanism that maps a URL to a specific piece of code (usually a controller method or a closure) that should handle that request.
 
 ## Defining Routes
@@ -100,4 +102,6 @@ Route::resource('photos', PhotoController::class);
 This single route declaration creates multiple routes to handle a variety of actions on the "photos" resource.
 
 ---
-[Back to Laravel Basics Index](https://hackmd.io/@jmrecodes/B1PTGFkXgl)
+[Back to Laravel Basics Index](laravel-basics-index.md)
+
+[Back to Knowledge Base Index](/README.md)

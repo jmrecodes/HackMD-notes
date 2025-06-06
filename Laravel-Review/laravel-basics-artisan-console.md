@@ -1,5 +1,7 @@
 # Laravel Basics: Artisan Console
 
+[![hackmd-github-sync-badge](https://hackmd.io/@jmrecodes/H16FzYJXee/badge)](https://hackmd.io/@jmrecodes/H16FzYJXee)
+
 Artisan is the command-line interface included with Laravel. It provides a number of helpful commands that can assist you while you build your application. Artisan lives at the root of your application as the `artisan` script and provides several commands that can help you build your application with ease.
 
 ## What is Artisan?
@@ -94,4 +96,6 @@ factory(App\Models\User::class)->create();
 This is just a subset of the commands available. Artisan is a powerful tool that significantly boosts developer productivity when working with Laravel.
 
 ---
-[Back to Laravel Basics Index](https://hackmd.io/@jmrecodes/B1PTGFkXgl)
+[Back to Laravel Basics Index](laravel-basics-index.md)
+
+[Back to Knowledge Base Index](/README.md)

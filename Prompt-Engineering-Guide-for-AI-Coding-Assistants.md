@@ -346,3 +346,5 @@ Effective prompting is both an art and a science. The techniques in this guide w
 - [Cursor Documentation](https://cursor.sh/docs)
 - [Amazon CodeWhisperer Documentation](https://aws.amazon.com/codewhisperer/)
 - [Coding with AI: Best Practices](https://dev.to/)
+
+[Back to Knowledge Base Index](/README.md)

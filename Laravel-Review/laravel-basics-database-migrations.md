@@ -1,5 +1,7 @@
 # Laravel Basics: Database Migrations
 
+[![hackmd-github-sync-badge](https://hackmd.io/@jmrecodes/SkAqzF17ex/badge)](https://hackmd.io/@jmrecodes/SkAqzF17ex)
+
 Migrations are like version control for your database, allowing your team to easily define and share the application's database schema. They are typically paired with Laravel's schema builder to easily build your application's database schema.
 
 ## What are Migrations?
@@ -154,4 +156,6 @@ php artisan migrate:status
 ```
 
 ---
-[Back to Laravel Basics Index](https://hackmd.io/@jmrecodes/B1PTGFkXgl)
+[Back to Laravel Basics Index](laravel-basics-index.md)
+
+[Back to Knowledge Base Index](/README.md)

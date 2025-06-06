@@ -1,5 +1,7 @@
 # Laravel Basics: Middleware
 
+[![hackmd-github-sync-badge](https://hackmd.io/@jmrecodes/HyoOGtJXel/badge)](https://hackmd.io/@jmrecodes/HyoOGtJXel)
+
 Middleware in Laravel provide a convenient mechanism for inspecting and filtering HTTP requests entering your application. For example, Laravel includes middleware that verifies the user of your application is authenticated. If the user is not authenticated, the middleware will redirect the user to your application's login screen. However, if the user is authenticated, the middleware will allow the request to proceed further into the application.
 
 ## What is Middleware?
@@ -140,4 +142,6 @@ Route::put('/post/{id}', function ($id) {
 ```
 
 ---
-[Back to Laravel Basics Index](https://hackmd.io/@jmrecodes/B1PTGFkXgl)
+[Back to Laravel Basics Index](laravel-basics-index.md)
+
+[Back to Knowledge Base Index](/README.md)

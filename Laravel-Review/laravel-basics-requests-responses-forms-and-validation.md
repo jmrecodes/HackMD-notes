@@ -1,5 +1,7 @@
 # Laravel Basics: Requests, Responses, Forms & Validation
 
+[![hackmd-github-sync-badge](https://hackmd.io/@jmrecodes/HkHnfF1mxe/badge)](https://hackmd.io/@jmrecodes/HkHnfF1mxe)
+
 Interacting with incoming HTTP requests, sending appropriate responses, handling HTML forms, and validating user input are core aspects of any web application. Laravel provides elegant and robust ways to manage these tasks.
 
 ## HTTP Requests (`Illuminate\Http\Request`)
@@ -213,4 +215,6 @@ public function store(StorePostRequest $request)
 If validation fails, Laravel automatically redirects back. If the `authorize` method returns `false`, a 403 HTTP response is automatically returned.
 
 ---
-[Back to Laravel Basics Index](https://hackmd.io/@jmrecodes/B1PTGFkXgl)
+[Back to Laravel Basics Index](laravel-basics-index.md)
+
+[Back to Knowledge Base Index](/README.md)

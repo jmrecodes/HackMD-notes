@@ -1,5 +1,7 @@
 # Laravel Basics: Controllers
 
+[![hackmd-github-sync-badge](https://hackmd.io/@jmrecodes/SyTzMFkQlg/badge)](https://hackmd.io/@jmrecodes/SyTzMFkQlg)
+
 Controllers are a fundamental part of Laravel's MVC (Model-View-Controller) architecture. Instead of defining all request handling logic as closures in your route files, you can organize this behavior using controller classes.
 
 ## What is a Controller?
@@ -146,4 +148,6 @@ class UserController extends Controller
 ```
 
 ---
-[Back to Laravel Basics Index](https://hackmd.io/@jmrecodes/B1PTGFkXgl)
+[Back to Laravel Basics Index](laravel-basics-index.md)
+
+[Back to Knowledge Base Index](/README.md)

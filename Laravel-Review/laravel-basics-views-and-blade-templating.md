@@ -1,5 +1,7 @@
 # Laravel Basics: Views & Blade Templating
 
+[![hackmd-github-sync-badge](https://hackmd.io/@jmrecodes/HkGBGYkQlg/badge)](https://hackmd.io/@jmrecodes/HkGBGYkQlg)
+
 Views in Laravel are responsible for presenting data to the user. They typically contain the HTML markup of your application, along with any necessary logic to display dynamic content. Laravel uses the Blade templating engine, which is powerful yet simple.
 
 ## What are Views?
@@ -141,4 +143,6 @@ Data can be passed to the included view: `@include('shared.card', ['item' => $wi
 Laravel offers a powerful component system (similar to Vue/React components) for building reusable UI elements with Blade. This is a more advanced feature but very useful for larger applications.
 
 ---
-[Back to Laravel Basics Index](https://hackmd.io/@jmrecodes/B1PTGFkXgl)
+[Back to Laravel Basics Index](laravel-basics-index.md)
+
+[Back to Knowledge Base Index](/README.md)

@@ -1,5 +1,7 @@
 # Laravel Basics: Models & Eloquent ORM
 
+[![hackmd-github-sync-badge](https://hackmd.io/@jmrecodes/ByhXzt17ll/badge)](https://hackmd.io/@jmrecodes/ByhXzt17ll)
+
 Laravel's Eloquent ORM (Object-Relational Mapper) provides a beautiful, simple ActiveRecord implementation for working with your database. Each database table has a corresponding "Model" which is used to interact with that table. Models allow you to query for data in your tables, as well as insert new records and update or delete existing ones.
 
 ## What is a Model?
@@ -141,4 +143,6 @@ public function user()
 Then you can easily access related models: `$user->posts` or `$post->user`.
 
 ---
-[Back to Laravel Basics Index](https://hackmd.io/@jmrecodes/B1PTGFkXgl)
+[Back to Laravel Basics Index](laravel-basics-index.md)
+
+[Back to Knowledge Base Index](/README.md)

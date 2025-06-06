@@ -1,5 +1,7 @@
 # Setting up a Laravel Development Environment
 
+[![hackmd-github-sync-badge](https://hackmd.io/@jmrecodes/Hkts-Fk7xg/badge)](https://hackmd.io/@jmrecodes/Hkts-Fk7xg)
+
 To start building applications with Laravel, you'll need to set up a suitable development environment on your computer.
 
 ## Core Requirements
@@ -55,4 +57,6 @@ php artisan serve
 This will usually make your application accessible at `http://localhost:8000`.
 
 ---
-[Back to Laravel Basics Index](https://hackmd.io/@jmrecodes/B1PTGFkXgl)
+[Back to Laravel Basics Index](laravel-basics-index.md)
+
+[Back to Knowledge Base Index](/README.md)
