@@ -2,7 +2,7 @@
 
 [![hackmd-github-sync-badge](https://hackmd.io/cP2KKpYCR32Yl0rh2VnqaQ/badge)](https://hackmd.io/cP2KKpYCR32Yl0rh2VnqaQ)
 
-_A comprehensive collection of guides, tutorials, and references_
+_A collection of guides, tutorials, and references for general topics arranged by myself for technical and non-technical audience._
 
 ## 🤖 AI & Prompt Engineering
 
@@ -58,23 +58,10 @@ _A comprehensive collection of guides, tutorials, and references_
 
 ---
 
-## About This Knowledge Base
+About This Knowledge Base
 
-This repository contains a curated collection of notes on Laravel framework, prompt engineering for AI assistants, and various development resources. These materials are designed to serve as reference guides and tutorials for developers interested in Laravel, AI coding assistance, and other web development topics.
-
-### How to Use This Repository
-
-1. **Browse by Topic**: Navigate to the section that interests you most
-2. **Local Viewing**: Clone this repository to view all documents locally in your preferred Markdown viewer
-3. **Contribute**: Feel free to suggest improvements through pull requests
-
-### File Naming Convention
-
-All files in this repository follow a consistent naming convention:
-- No spaces in filenames (replaced with hyphens)
-- Descriptive names that clearly indicate the content
-- Markdown format (.md) for all documentation files
+This is a curated collection of notes created with HackMD. Feel free to explore the guides based on your interests or current learning needs. All notes are regularly updated to maintain accuracy.
 
 ---
 
-*Last updated: June 7 2026 | Created with 💙 from the Philippines 🇵🇭 using [Cursor](https://www.cursor.com/) and [HackMD](https://hackmd.io/)*
+*Last updated: June 7, 2025 | Created with 💙 from the Philippines 🇵🇭 using [Cursor](https://www.cursor.com/) and [HackMD](https://hackmd.io/)*
