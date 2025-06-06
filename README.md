@@ -69,4 +69,4 @@ All files in this repository follow a consistent naming convention:
 
 ---
 
-*Last updated: May 2023 | Created with 💙 from 🇵�� the Philippines*
+*Last updated: May 2023 | Created with 💙 from the Philippines 🇵🇭 using [Cursor](https://www.cursor.com/) and [HackMD](https://hackmd.io/)*
