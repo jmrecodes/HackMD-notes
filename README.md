@@ -48,4 +48,4 @@ This is a curated collection of notes created with HackMD. Feel free to explore 
 
 ---
 
-*Last updated: May 2025 | Created with 💙 using HackMD*
+*Last updated: May 2025 | Created with 💙 using [HackMD](https://hackmd.io) & [Cursor](https://www.cursor.com/) from 🇵🇭 the Philippines*
