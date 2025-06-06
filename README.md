@@ -50,6 +50,14 @@ _A comprehensive collection of guides, tutorials, and references_
 
 ---
 
+## ☁️ Google Cloud
+
+| Guide | Description |
+| ----- | ----------- |
+| [Google Cloud and Laravel Deployment](Google-Cloud-and-Laravel-Deployment/deploying_a_secure_and_scalable_laravel_app_on_google_clouds_index.md) | A guide on deploying Laravel applications to Google Cloud |
+
+---
+
 ## About This Knowledge Base
 
 This repository contains a curated collection of notes on Laravel framework, prompt engineering for AI assistants, and various development resources. These materials are designed to serve as reference guides and tutorials for developers interested in Laravel, AI coding assistance, and other web development topics.
