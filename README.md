@@ -1,4 +1,4 @@
-# JM's Knowledge Base
+# Accumulated General Knowledge Base
 
 [![hackmd-github-sync-badge](https://hackmd.io/cP2KKpYCR32Yl0rh2VnqaQ/badge)](https://hackmd.io/cP2KKpYCR32Yl0rh2VnqaQ)
 
@@ -69,4 +69,4 @@ All files in this repository follow a consistent naming convention:
 
 ---
 
-*Last updated: May 2023 | Created with 💙 from the Philippines 🇵🇭 using [Cursor](https://www.cursor.com/) and [HackMD](https://hackmd.io/)*
+*Last updated: June 7 2026 | Created with 💙 from the Philippines 🇵🇭 using [Cursor](https://www.cursor.com/) and [HackMD](https://hackmd.io/)*
