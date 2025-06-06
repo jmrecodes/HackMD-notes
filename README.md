@@ -4,6 +4,14 @@
 
 _A comprehensive collection of guides, tutorials, and references_
 
+## 🤖 AI & Prompt Engineering
+
+| Guide | Description |
+| ----- | ----------- |
+| [Comprehensive Prompt Engineering Guide](Prompt-Engineering-Guide-for-AI-Coding-Assistants.md) ✨ | Master the art of communicating with AI coding assistants |
+
+---
+
 ## 📚 Laravel Framework
 
 ### Foundation
@@ -31,14 +39,6 @@ _A comprehensive collection of guides, tutorials, and references_
 | [Laravel Basics: Artisan Console](Laravel-Review/laravel-basics-artisan-console.md) | Leveraging Laravel's command-line interface for development |
 | [Laravel Basics: Database Migrations](Laravel-Review/laravel-basics-database-migrations.md) | Managing database schema changes with Laravel migrations |
 | [Laravel Basics: Requests, Responses, Forms & Validation](Laravel-Review/laravel-basics-requests-responses-forms-and-validation.md) | Handling user input and validating form data in Laravel |
-
----
-
-## 🤖 AI & Prompt Engineering
-
-| Guide | Description |
-| ----- | ----------- |
-| [Comprehensive Prompt Engineering Guide](Prompt-Engineering-Guide-for-AI-Coding-Assistants.md) ✨ | Master the art of communicating with AI coding assistants |
 
 ---
 
