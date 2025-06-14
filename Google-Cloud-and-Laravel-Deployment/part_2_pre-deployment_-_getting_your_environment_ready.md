@@ -27,29 +27,70 @@ This should output the versions of the installed components.
 
 ### Step 2: Initialize the `gcloud` CLI
 
-Now you need to connect the `gcloud` tool to your Google Cloud account and project. This is done with the `init` command.
+Now that the SDK is installed, you need to connect it to your Google Cloud account. This one-time setup process configures your credentials and sets some useful defaults.
 
+Run the following command in your terminal:
 ```bash
 gcloud init
 ```
-This command will walk you through a few steps:
+This interactive command will guide you through a few steps:
 
-1.  **Log in:** It will open a browser window, asking you to log in to the Google account you used to sign up for GCP.
-2.  **Select a Project:** After logging in, it will list the GCP projects associated with your account. You will see the `laravel-guide-app` project you created in Part 1. Select it.
-3.  **Set a Default Region and Zone:** This is an important concept.
-    *   **Region:** A specific geographical location, like `us-west1` (The Dalles, Oregon) or `europe-west2` (London).
-    *   **Zone:** An isolated location within a region, like `us-west1-a` or `us-west1-b`.
-    *   **Why does this matter for the free tier?** The `e2-micro` VM is only free in certain US regions (`us-west1`, `us-central1`, `us-east1`). It's best to choose one of these now. Let's use `us-west1-a`. When prompted, enter the number corresponding to `us-west1` for the region, and then `us-west1-a` for the zone.
+1.  **Log in:** It will ask you to log in with a Google account. A browser window will open automatically. Be sure to select the same Google account you used to sign up for Google Cloud in Part 1.
+2.  **Select Your Cloud Project:** After you've logged in, the CLI will list all the Google Cloud projects associated with your account. You should see the `laravel-guide-app` project you created earlier. Select it from the list by entering the corresponding number.
 
-After this, your `gcloud` CLI is configured. It knows which project to work on by default, saving you from having to specify it in every command.
+You may notice that the command finishes without asking you to set a default location. If you see the message below, don't worry—this is expected for new projects.
+
+```
+Not setting default zone/region (this feature makes it easier to use
+[gcloud compute] by setting an appropriate default value for the
+--zone and --region flag).
+... make sure the Compute Engine API is enabled for your project...
+```
+This simply means we need to manually enable the service for creating virtual machines and then set our default location in the next step.
+
+### Step 2.5: Enable API and Set Default Location (Critical for Free Tier!)
+
+Before we can create a server, we must enable the **Compute Engine API**. We also need to tell `gcloud` which geographical location to create our resources in by default. This is the most important step for ensuring your server is free.
+
+1.  **Enable the Compute Engine API:**
+    In your terminal, run the following command. This tells your Google Cloud project that you intend to use virtual machines.
+    ```bash
+    gcloud services enable compute.googleapis.com
+    ```
+
+2.  **Set Your Default Region and Zone:**
+    The `e2-micro` virtual machine (our server) is **only free** when it's located in one of these three US regions:
+    *   `us-west1` (Oregon)
+    *   `us-central1` (Iowa)
+    *   `us-east1` (South Carolina)
+
+    To stay within the free tier, you **must** choose one of these. We'll use `us-west1` for this guide. Run these two commands to set your default region and a zone within it:
+    ```bash
+    gcloud config set compute/region us-west1
+    gcloud config set compute/zone us-west1-a
+    ```
+
+After completing this, your `gcloud` CLI is fully configured for this project.
 
 ### Step 3: Prepare Your Laravel Application
 
-If you don't have a Laravel application yet, create a new one:
+#### Prerequisite: Install Composer
+
+To create a Laravel project, you need Composer, which is a package manager for the PHP programming language. If you don't have it installed, it's a quick setup:
+
+*   [Follow the official Composer installation instructions](https://getcomposer.org/doc/00-intro.md)
+
+You can verify it's installed correctly by running `composer --version`.
+
+#### Create a New Laravel Project
+
+If you don't have a Laravel application yet, open your terminal to the directory where you keep your code projects and run:
 ```bash
 composer create-project --prefer-dist laravel/laravel gcp-laravel-app
 cd gcp-laravel-app
 ```
+This command downloads the latest version of Laravel and all its dependencies into a new `gcp-laravel-app` folder.
+
 Now, let's prepare it for the cloud.
 
 #### Environment Variables and the `.env` file
@@ -88,7 +129,7 @@ Your `.env.example` file *is* committed to Git. It serves as a template for deve
 
 Make sure your `.env.example` file mirrors the structure of your `.env` file, but with all secret values removed.
 
-**Example `.env.example**:**
+**Example `.env.example`:**
 ```
 APP_NAME=Laravel
 APP_ENV=local
