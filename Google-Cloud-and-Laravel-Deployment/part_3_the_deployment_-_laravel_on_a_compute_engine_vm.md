@@ -51,7 +51,7 @@ The first time you run this, `gcloud` will automatically create an SSH key pair 
 
 After it connects, your terminal prompt will change. It will look something like `your_username@laravel-server:~$`. **You are now inside your server!** All subsequent commands in this guide should be run inside this SSH session, unless specified otherwise.
 
-### Step 3: Install the "LEMP" Stack
+### Step 3: Install the "LEMP" Stack with PHP 8.3
 
 Our Laravel app needs a few key pieces of software to run: **L**inux (which we already have), **E**-Nginx (our web server), **M**-MySQL (our database, for now), and **P**-PHP.
 
@@ -68,17 +68,44 @@ sudo apt upgrade -y
 *   `-y`: This automatically answers "yes" to any prompts, which is useful for scripts.
 
 Now, let's install the stack.
+
+#### 3.1: Install Nginx and Helper Tools
 ```bash
 # Install Nginx, cURL, zip, and unzip utilities
 sudo apt install -y nginx curl zip unzip
+```
 
-# Install PHP's FastCGI Process Manager and required extensions for Laravel
-sudo apt install -y php8.1-fpm php8.1-mysql php8.1-mbstring php8.1-xml php8.1-bcmath php8.1-curl
+#### 3.2: Add a PHP Repository and Install PHP 8.3
+The default software sources for Debian 11 have older versions of PHP. To get the latest stable version, we will add a trusted, widely-used third-party repository maintained by Ondřej Surý.
+
+```bash
+# Install prerequisite packages
+sudo apt install -y apt-transport-https lsb-release ca-certificates wget
+
+# Download and add the repository's GPG key
+sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+
+# Add the repository to your sources list
+echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+
+# Update the package list again to include the new PHP packages
+sudo apt update
+```
+
+Now we can install PHP 8.3 and the required extensions for Laravel.
+
+> **What is PHP-FPM?**
+> PHP-FPM (FastCGI Process Manager) is the service that actually runs our PHP code. Our web server, Nginx, doesn't execute PHP on its own. Instead, when a request for a PHP page comes in, Nginx passes it to the PHP-FPM service. This separation makes the stack more efficient and scalable.
+
+```bash
+# Install PHP 8.3's FastCGI Process Manager and required extensions for Laravel
+sudo apt install -y php8.3-fpm php8.3-mysql php8.3-mbstring php8.3-xml php8.3-bcmath php8.3-curl
 ```
 *   `nginx`: A high-performance web server. It will listen for requests from the internet and direct them to our PHP application.
-*   `php8.1-fpm`: The PHP interpreter. Nginx doesn't run PHP code by itself; it passes the request to this `fpm` service.
-*   The other `php8.1-*` packages are extensions Laravel relies on for database connections (`mysql`), string manipulation (`mbstring`), math (`bcmath`), etc.
+*   `php8.3-fpm`: The PHP interpreter and process manager. Nginx passes requests to this service.
+*   The other `php8.3-*` packages are extensions Laravel relies on for database connections (`mysql`), string manipulation (`mbstring`), math (`bcmath`), etc.
 
+#### 3.3: Install Composer
 Finally, install Composer, the dependency manager for PHP.
 ```bash
 # Download the installer script
@@ -185,7 +212,7 @@ The final step is to tell Nginx where our application lives.
         location ~ \.php$ {
             # This passes the request to the PHP-FPM service we installed.
             # The 'sock' file is a communication channel between Nginx and PHP.
-            fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+            fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;
             # This tells PHP which file to execute.
             fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
             # Includes other standard FastCGI parameters.
