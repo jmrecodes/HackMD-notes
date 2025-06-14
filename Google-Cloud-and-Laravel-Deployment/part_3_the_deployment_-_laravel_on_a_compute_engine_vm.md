@@ -164,19 +164,55 @@ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
     ```bash
     sudo apt install -y git
     ```
-2.  **Clone your project:** We'll clone it into `/var/www/`. Replace the URL with your own repository's URL.
+2.  **(Recommended) Set Up an SSH Key for Git:** Instead of cloning with HTTPS and potentially needing to enter credentials, the best practice for a server is to use an SSH key. This allows the server to securely communicate with your Git provider (like GitHub or GitLab) without passwords.
+
+    **a. Generate a new SSH key:**
+    Because you will be running `git` with `sudo`, you should generate the key as the root user.
     ```bash
-    sudo git clone https://github.com/your-username/your-laravel-app.git /var/www/your-laravel-app
+    # Generate the key. Press Enter 3 times to accept defaults (no passphrase).
+    sudo ssh-keygen -t ed25519 -C "your_email@example.com"
     ```
-3.  **Navigate into the directory:**
+    This creates a new, secure key pair in the root user's home directory: `/root/.ssh/`.
+
+    **b. Start the ssh-agent and add your key:**
+    The `ssh-agent` is a background program that handles your private keys.
+    ```bash
+    eval "$(ssh-agent -s)"
+    sudo ssh-add /root/.ssh/id_ed25519
+    ```
+
+    > **Troubleshooting: "UNPROTECTED PRIVATE KEY FILE!" Error**
+    > You might see a scary-looking error:
+    > `Permissions 0644 for '/root/.ssh/id_ed25519' are too open.`
+    > `It is required that your private key files are NOT accessible by others.`
+    > `This private key will be ignored.`
+    > This is a security feature. SSH requires your private key file to be readable *only by you*. The fix is to change the file's permissions.
+    > ```bash
+    > sudo chmod 600 /root/.ssh/id_ed25519
+    > ```
+    > Now, run `sudo ssh-add /root/.ssh/id_ed25519` again. It should work without error.
+
+    **c. Add the public key to your Git provider:**
+    You need to give your Git provider the *public* half of your key. Display it on the screen:
+    ```bash
+    sudo cat /root/.ssh/id_ed25519.pub
+    ```
+    Copy the entire output (starting with `ssh-ed25519...` and ending with your email address). Go to your GitHub, GitLab, or Bitbucket account settings and add this as a new SSH key. Usually, this is found under `Settings > SSH and GPG keys`.
+
+3.  **Clone your project:** Now you can securely clone your repository using the SSH link. You can find this on your repository's main page (click the "Code" button and select "SSH").
+    ```bash
+    # Replace the URL with your own repository's SSH URL.
+    sudo git clone git@github.com:your-username/your-laravel-app.git /var/www/your-laravel-app
+    ```
+4.  **Navigate into the directory:**
     ```bash
     cd /var/www/your-laravel-app
     ```
-4.  **Install dependencies:** Tell Composer to install all the packages listed in `composer.json`, but without development tools like PHPUnit. The `--optimize-autoloader` flag makes class loading faster in production.
+5.  **Install dependencies:** Tell Composer to install all the packages listed in `composer.json`, but without development tools like PHPUnit. The `--optimize-autoloader` flag makes class loading faster in production.
     ```bash
     sudo composer install --optimize-autoloader --no-dev
     ```
-5.  **Set up the `.env` file:** Copy the example file to create our production environment file.
+6.  **Set up the `.env` file:** Copy the example file to create our production environment file.
     ```bash
     sudo cp .env.example .env
     ```
@@ -190,11 +226,11 @@ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
     *   `APP_URL=http://YOUR_VM_EXTERNAL_IP` (Use the IP from Step 1)
     Save the file (in nano: `Ctrl+X`, then `Y`, then `Enter`).
 
-6.  **Generate the Application Key:** This is a crucial security step for Laravel.
+7.  **Generate the Application Key:** This is a crucial security step for Laravel.
     ```bash
     sudo php artisan key:generate
     ```
-7.  **Set Permissions:** The web server (which runs as the `www-data` user) needs permission to write to the `storage` and `bootstrap/cache` directories to create log files, cache views, etc.
+8.  **Set Permissions:** The web server (which runs as the `www-data` user) needs permission to write to the `storage` and `bootstrap/cache` directories to create log files, cache views, etc.
     ```bash
     # Change the owner of these directories to the web server user
     sudo chown -R www-data:www-data storage bootstrap/cache
