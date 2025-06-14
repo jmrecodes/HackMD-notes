@@ -204,21 +204,30 @@ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
     # Replace the URL with your own repository's SSH URL.
     sudo git clone git@github.com:your-username/your-laravel-app.git /var/www/your-laravel-app
     ```
-4.  **Navigate into the directory:**
+4.  **Set Project Ownership:** The files are currently owned by the `root` user because we used `sudo` to clone the repository. Change the ownership to your current user so you can run commands without `sudo`.
+    ```bash
+    # Note: $USER is a variable that automatically contains your username.
+    sudo chown -R $USER:$USER /var/www/your-laravel-app
+    ```
+
+5.  **Navigate into the directory:**
     ```bash
     cd /var/www/your-laravel-app
     ```
-5.  **Install dependencies:** Tell Composer to install all the packages listed in `composer.json`, but without development tools like PHPUnit. The `--optimize-autoloader` flag makes class loading faster in production.
+6.  **Install Dependencies with Composer:** Now that you own the files, you can run Composer without `sudo`.
     ```bash
-    sudo composer install --optimize-autoloader --no-dev
+    composer install --optimize-autoloader --no-dev
     ```
-6.  **Set up the `.env` file:** Copy the example file to create our production environment file.
+    > **Security Note: Why not `sudo composer`?**
+    > You should avoid running Composer as the `root`/`sudo` user. Composer is designed to run as a normal user. Running it as root can cause permission issues and creates a security risk by allowing package scripts to run with elevated privileges.
+
+7.  **Set up the `.env` file:** Copy the example file to create our production environment file.
     ```bash
-    sudo cp .env.example .env
+    cp .env.example .env
     ```
     Now, open it with a text editor like `nano`.
     ```bash
-    sudo nano .env
+    nano .env
     ```
     Make these critical changes for production:
     *   `APP_ENV=production`
@@ -226,10 +235,51 @@ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
     *   `APP_URL=http://YOUR_VM_EXTERNAL_IP` (Use the IP from Step 1)
     Save the file (in nano: `Ctrl+X`, then `Y`, then `Enter`).
 
-7.  **Generate the Application Key:** This is a crucial security step for Laravel.
+8.  **Generate the Application Key:** This is a crucial security step for Laravel.
     ```bash
-    sudo php artisan key:generate
+    php artisan key:generate
     ```
+9.  **Build Frontend Assets (if applicable):** Many modern Laravel applications use a JavaScript frontend (like Vue, React, or Svelte) that must be compiled or "built" on the server. This process is typically handled by Node.js and npm.
+
+    First, you need a modern version of Node.js. Installing it from Debian's default `apt` repositories often gives you an outdated version, leading to errors. The best way to manage Node.js is with **NVM (Node Version Manager)**.
+
+    **a. Install NVM**
+    Download and run the official installation script.
+    ```bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+    ```
+    After installation, you must reload your shell's configuration to use `nvm`. You may need to close and re-open your terminal for the changes to apply.
+    ```bash
+    source ~/.bashrc
+    ```
+    Verify the installation:
+    ```bash
+    nvm --version
+    ```
+
+    **b. Install Node.js**
+    Use NVM to install a modern Long-Term Support (LTS) version of Node.js, such as Node 20.
+    ```bash
+    nvm install 20
+    nvm use 20
+    nvm alias default 20
+    ```
+    Check your versions. You should see `v20.x.x` for Node and `v10.x.x` or higher for npm.
+    ```bash
+    node -v
+    npm -v
+    ```
+
+    > **Troubleshooting: The `EBADENGINE` Error**
+    > If you were to run `npm install` with an old version of Node.js, you would likely see many `npm WARN EBADENGINE` errors. This means your Node.js version is too old for the packages defined in your `package.json`. Using NVM to install a recent Node.js version as shown above is the correct fix.
+
+    **c. Install Dependencies and Build**
+    Now, you can install your project's npm dependencies and build your frontend assets for production.
+    ```bash
+    npm install
+    npm run build
+    ```
+10. **Set Final Permissions:** The web server (which runs as the `www-data` user) needs permission to write to the `storage` and `bootstrap/cache` directories. This is the last step that requires `sudo`.
 8.  **Set Permissions:** The web server (which runs as the `www-data` user) needs permission to write to the `storage` and `bootstrap/cache` directories to create log files, cache views, etc.
     ```bash
     # Change the owner of these directories to the web server user
