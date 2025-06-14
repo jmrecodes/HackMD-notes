@@ -239,7 +239,81 @@ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
     ```bash
     php artisan key:generate
     ```
-9.  **Build Frontend Assets (if applicable):** Many modern Laravel applications use a JavaScript frontend (like Vue, React, or Svelte) that must be compiled or "built" on the server. This process is typically handled by Node.js and npm.
+
+9.  **Set Up a Simple Database (SQLite)**
+
+    For this initial deployment, we will use SQLite, a simple, file-based database. It's a great way to get your application running quickly without setting up a full database server like MySQL or PostgreSQL.
+
+    **a. Confirm `.env` Configuration**
+
+    Laravel is typically configured to use SQLite by default in new projects. Open your `.env` file to confirm the `DB_CONNECTION` is set to `sqlite`. The other `DB_*` variables will be ignored.
+
+    ```dotenv
+    DB_CONNECTION=sqlite
+    # DB_HOST=127.0.0.1
+    # DB_PORT=3306
+    # DB_DATABASE=laravel
+    # DB_USERNAME=root
+    # DB_PASSWORD=
+    ```
+
+    **b. Create the SQLite Database File**
+
+    Unlike other databases, SQLite doesn't have a server; the entire database is just a single file. Laravel looks for this file at `database/database.sqlite` by default.
+
+    Let's create this empty file now:
+
+    ```bash
+    touch database/database.sqlite
+    ```
+
+    **c. Set Database Permissions (Crucial Step)**
+    This is the most common point of failure for SQLite setups. The web server (running as the `www-data` user) needs permission to not only read the database file but also to write to it and its containing folder to manage transactions. Failing to set this will result in the `SQLSTATE[HY000]: General error: 8 attempt to write a readonly database` error.
+
+    ```bash
+    # Give the web server ownership of the database directory and file
+    sudo chown -R www-data:www-data database
+
+    # Set read/write/execute permissions for the owner and group
+    sudo chmod -R 775 database
+    ```
+
+    **d. Run Migrations and Troubleshoot**
+
+    With the database file created and permissions set, you can set up your application's tables using Laravel's migration command. However, this is where you might encounter a different common issue.
+
+    Run the migration command:
+    ```bash
+    php artisan migrate --seed
+    ```
+
+    If you see an error that says **`could not find driver`**, it means your server's PHP installation doesn't have the necessary SQLite extension.
+
+    **The Fix: Install the PHP SQLite Extension**
+
+    1.  **Identify your PHP Version**: Find the exact version of PHP you are running.
+        ```bash
+        php -v
+        # It will show something like "PHP 8.3.8..."
+        ```
+
+    2.  **Install the Extension**: Use `apt` to install the package for your specific PHP version. For example, if you are using PHP 8.3:
+        ```bash
+        sudo apt update
+        sudo apt install php8.3-sqlite3
+        ```
+
+    3.  **Restart PHP-FPM**: To load the new extension, you must restart the PHP-FPM service.
+        ```bash
+        sudo systemctl restart php8.3-fpm
+        ```
+
+    4.  **Retry the Migration**: Run the migration command again. It should now connect successfully and build your database schema.
+        ```bash
+        php artisan migrate --seed
+        ```
+
+10. **Build Frontend Assets (if applicable):** Many modern Laravel applications use a JavaScript frontend (like Vue, React, or Svelte) that must be compiled or "built" on the server. This process is typically handled by Node.js and npm.
 
     First, you need a modern version of Node.js. Installing it from Debian's default `apt` repositories often gives you an outdated version, leading to errors. The best way to manage Node.js is with **NVM (Node Version Manager)**.
 
@@ -279,8 +353,7 @@ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
     npm install
     npm run build
     ```
-10. **Set Final Permissions:** The web server (which runs as the `www-data` user) needs permission to write to the `storage` and `bootstrap/cache` directories. This is the last step that requires `sudo`.
-8.  **Set Permissions:** The web server (which runs as the `www-data` user) needs permission to write to the `storage` and `bootstrap/cache` directories to create log files, cache views, etc.
+11. **Set Final Permissions:** The web server (which runs as the `www-data` user) needs permission to write to the `storage` and `bootstrap/cache` directories to create log files, cache views, etc.
     ```bash
     # Change the owner of these directories to the web server user
     sudo chown -R www-data:www-data storage bootstrap/cache
@@ -349,7 +422,10 @@ The final step is to tell Nginx where our application lives.
         }
 
         # A security measure to block access to hidden files like .env or .git
-        location ~ /\.(?!well-known).* {
+        location ~ /\.well-known {
+            allow all;
+        }
+        location ~ /\. {
             deny all;
         }
     }
@@ -375,7 +451,7 @@ The final step is to tell Nginx where our application lives.
 
 **Milestone!** Open your web browser and navigate to `http://YOUR_VM_EXTERNAL_IP`. You should now see the default Laravel landing page!
 
-It's not secure (no HTTPS), and it's not connected to a database, but you have successfully deployed your code to a server you built in the cloud.
+It's not secure (no HTTPS), but you have successfully deployed your code to a server you built in the cloud.
 
 ---
 **Next Up:** In Part 4, we will connect our application to a database, exploring both the free, self-managed option and the more robust, scalable Cloud SQL option.
