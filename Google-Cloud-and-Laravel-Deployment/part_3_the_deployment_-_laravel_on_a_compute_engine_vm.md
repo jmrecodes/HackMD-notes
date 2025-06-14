@@ -67,6 +67,16 @@ sudo apt upgrade -y
 *   `apt`: This is Debian's package manager.
 *   `-y`: This automatically answers "yes" to any prompts, which is useful for scripts.
 
+> **Pro-Tip: Why is `apt upgrade` so slow?**
+> You might notice this command takes a very long time to complete (sometimes over an hour!). This is normal for an `e2-micro` VM. This machine type has "burstable" CPU performance. For sustained, CPU-heavy tasks like a full system upgrade, the VM exhausts its burst credits and gets throttled to a very low baseline speed, especially when installing large packages like `google-cloud-cli`.
+>
+> **The Workaround:** For a much faster setup, you can temporarily resize your VM.
+> 1. Stop the VM from the Google Cloud Console.
+> 2. Edit the VM and change the machine type to `e2-medium`.
+> 3. Start the VM and run your `apt upgrade` and other installations (it will be much faster).
+> 4. Stop the VM again, resize it back down to `e2-micro`, and restart it.
+> The cost for a few minutes on a larger machine is negligible (a few cents) and can save you a lot of time.
+
 Now, let's install the stack.
 
 #### 3.1: Install Nginx and Helper Tools
