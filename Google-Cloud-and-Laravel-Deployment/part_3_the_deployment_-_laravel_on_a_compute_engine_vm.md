@@ -77,6 +77,39 @@ sudo apt upgrade -y
 > 4. Stop the VM again, resize it back down to `e2-micro`, and restart it.
 > The cost for a few minutes on a larger machine is negligible (a few cents) and can save you a lot of time.
 
+> **What if the Upgrade Fails or is Interrupted?**
+> An SSH connection might drop, or you might accidentally close the terminal during a long `apt upgrade`. If this happens, your package manager can be left in a broken state. Don't panic! Here are a few commands to run to check the health of your system and fix any potential issues.
+>
+> **1. Fix Broken Dependencies**
+>
+> This is the first command you should run. It attempts to correct any broken package dependencies.
+>
+> ```bash
+> sudo apt-get install -f
+> ```
+>
+> If you see output like `0 upgraded, 0 newly installed, 0 to remove`, it's a good sign that nothing was broken. The "X not upgraded" message is normal and can be ignored.
+>
+> **2. Reconfigure Unconfigured Packages**
+>
+> This command will configure any packages that were unpacked but not fully installed.
+>
+> ```bash
+> sudo dpkg --configure -a
+> ```
+>
+> Perfect output is no output. If it returns you to the prompt silently, it found nothing to do.
+>
+> **3. Perform a System Health Check**
+>
+> This final check verifies the package cache and double-checks for dependency issues.
+>
+> ```bash
+> sudo apt-get check
+> ```
+>
+> Like the command above, no news is good news. If it returns no errors, you can be confident your system is healthy.
+
 Now, let's install the stack.
 
 #### 3.1: Install Nginx and Helper Tools
